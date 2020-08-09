@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
+const morgan = require('morgan');
 require('dotenv').config()
 
 const register = require('./controllers/register');
@@ -12,16 +13,14 @@ const image = require('./controllers/image');
 
 const db = knex({
   client: 'pg',
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
-  }
+  connection: process.env.POSTGRES_URI
 });
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan('combined'));
 
 app.get('/', (req, res) => { res.send('app is working'); });
 app.post('/signin', signin.handleSignIn(db, bcrypt));
