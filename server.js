@@ -10,7 +10,8 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
-const auth = require('./controllers/authorization')
+const auth = require('./controllers/authorization');
+const signout = require('./controllers/signout');
 
 const db = knex({
   client: 'pg',
@@ -30,6 +31,7 @@ app.get('/profile/:id', auth.requireAuth, profile.handleProfileGet(db));
 app.post('/profile/:id', auth.requireAuth, (req, res) => { profile.handleProfileUpdate(req, res, db) })
 app.put('/image', auth.requireAuth, image.handleImage(db));
 app.post('/imageurl', auth.requireAuth, (req, res) => { image.handleApiCall(req, res); });
+app.post('/signout', auth.requireAuth, signout.signOutUser)
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`App is running on port ${process.env.PORT || 3000}`);

@@ -3,7 +3,6 @@ const { createSessions } = require("./signin");
 const handleRegister = (db, bcrypt) => (req, res) => {
   const { email, name, password } = req.body;
   const hash = bcrypt.hashSync(password);
-  console.log(`handleRegister`, req.body);
 
   if (!email || !name || !password) {
     return res.status(400).json('incorrect form submission');
