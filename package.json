@@ -22,7 +22,7 @@
     "redis": "^3.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.17.5"
+    "nodemon": "^2.0.22"
   },
   "engines": {
     "npm": "8.19.3",
