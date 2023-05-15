@@ -19,6 +19,13 @@ const db = knex({
   },
 });
 
+console.log(
+  'env vars here',
+  process.env.DATABASE_URL,
+  process.env.API_CLARIFAI,
+  process.env.PORT
+);
+
 const app = express();
 
 app.use(cors());
